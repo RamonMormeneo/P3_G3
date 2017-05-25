@@ -67,10 +67,9 @@ Mapa::Mapa()
 		for (int j = 0; j < max_cols; j++)
 		{
 			map[aux][j] = line[j];
-			
 		}
 		aux++;
-	}
+	}	myFile1.close();
 }
 
 

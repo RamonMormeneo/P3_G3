@@ -3,10 +3,16 @@
 #include <iostream>
 #include <list>
 #include "Mapa.h"
+#include "Player.h"
 
 void main()
 {
 
 	Mapa a;
-	a.print(false,'1');
+	Player p1(true, a);
+	Player p2(false, a);
+	a.print(true, p1.it->letra);
+	p1.it++;
+	a.print(true, p1.it->letra);
+
 }

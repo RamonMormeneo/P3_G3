@@ -1,6 +1,8 @@
 #pragma once
 #include <list>
 #include "Mapa.h"
+#include "Input.inl.hh"
+
 class Player
 {
 public:
@@ -14,10 +16,12 @@ public:
 		char letra;
 		int last_col;
 		int last_row;
+		char last_char='.';
 	};
 	std::list <entio> entios;
-	int movements;
+	int movements=10;
 	Mapa &mymapa;
+	void Move(enti::InputKey a);
 	std::list<entio>::iterator it;
 	Player(bool letras, Mapa &a);
 	~Player();

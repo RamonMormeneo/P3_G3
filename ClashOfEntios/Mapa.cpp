@@ -8,6 +8,7 @@ void Mapa::print(bool p1turn, char entio)
 	{
 		for (int j = 0; j < max_cols; j++)
 		{
+			
 			switch (map[i][j])
 			{
 			case 'X':
@@ -40,12 +41,13 @@ void Mapa::print(bool p1turn, char entio)
 					enti::cout << enti::Color::LIGHTMAGENTA;
 				}
 				break;
+				
 			}
-			enti::cout << map[i][j]<< ' ';
+			std::cout << map[i][j]<< ' ';
 		}
-		enti::cout << enti::endl;
+		std::cout << std::endl;
 	}
-	enti::cout << enti::cend;
+	/*enti::cout << enti::cend;*/
 }
 
 void Mapa::modificar(int row, int col, char simbol)
@@ -69,7 +71,9 @@ Mapa::Mapa()
 			map[aux][j] = line[j];
 		}
 		aux++;
-	}	myFile1.close();
+	}
+	myFile1.close();
+
 }
 
 

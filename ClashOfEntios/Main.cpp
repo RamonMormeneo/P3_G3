@@ -11,8 +11,6 @@ void main()
 	Mapa a;
 	Player p1(true, a);
 	Player p2(false, a);
-	a.print(true, p1.it->letra);
 	p1.it++;
-	a.print(true, p1.it->letra);
 
 }

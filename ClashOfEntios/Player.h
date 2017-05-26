@@ -21,7 +21,13 @@ public:
 	std::list <entio> entios;
 	int movements=10;
 	Mapa &mymapa;
-	void Move(enti::InputKey a);
+	void reorder();
+	void changeentio();
+	void ataque();
+	void controlZX();
+	bool moveback;
+	bool moveforward;
+	void Input(enti::InputKey a);
 	std::list<entio>::iterator it;
 	Player(bool letras, Mapa &a);
 	~Player();

@@ -27,6 +27,7 @@ public:
 	void controlZX();
 	bool moveback;
 	bool moveforward;
+	void Move(enti::InputKey a);
 	void Input(enti::InputKey a);
 	std::list<entio>::iterator it;
 	Player(bool letras, Mapa &a);

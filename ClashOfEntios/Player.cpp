@@ -2,6 +2,80 @@
 
 
 
+void Player::changeentio()
+{
+}
+
+void Player::ataque()
+{
+}
+
+void Player::controlZX()
+{
+}
+
+void Player::Move(enti::InputKey a)
+{
+	if (a == enti::InputKey::w || a == enti::InputKey::W)
+	{
+		if (mymapa.map[it->row - 1][it->colum] != 'X' && mymapa.map[it->row - 1][it->colum] != 'O')
+		{
+			mymapa.modificar(it->row, it->colum, it->last_char);
+			it->row--;
+			it->last_char = mymapa.map[it->row][it->colum];
+			mymapa.modificar(it->row, it->colum, it->letra);
+			it->fatiga++;
+			movements--;
+			moveback = true;
+		}
+	}
+	else if (a == enti::InputKey::a || a == enti::InputKey::A)
+	{
+		if (mymapa.map[it->row][it->colum - 1] != 'X' && mymapa.map[it->row][it->colum - 1] != 'O')
+		{
+			mymapa.modificar(it->row, it->colum, it->last_char);
+			it->last_col = it->colum;
+			it->last_row = it->row;
+			it->colum--;
+			it->last_char = mymapa.map[it->row][it->colum];
+			mymapa.modificar(it->row, it->colum, it->letra);
+			it->fatiga++;
+			movements--;
+			moveback = true;
+		}
+	}
+	else if (a == enti::InputKey::s || a == enti::InputKey::S)
+	{
+		if (mymapa.map[it->row + 1][it->colum] != 'X' && mymapa.map[it->row + 1][it->colum] != 'O')
+		{
+			mymapa.modificar(it->row, it->colum, it->last_char);
+			it->last_col = it->colum;
+			it->last_row = it->row;
+			it->row++;
+			it->last_char = mymapa.map[it->row][it->colum];
+			mymapa.modificar(it->row, it->colum, it->letra);
+			it->fatiga++;
+			movements--;
+			moveback = true;
+		}
+	}
+	else if (a == enti::InputKey::d || a == enti::InputKey::D)
+	{
+		if (mymapa.map[it->row][it->colum + 1] != 'X' && mymapa.map[it->row][it->colum + 1] != 'O')
+		{
+			mymapa.modificar(it->row, it->colum, it->last_char);
+			it->last_col = it->colum;
+			it->last_row = it->row;
+			it->colum++;
+			it->last_char = mymapa.map[it->row][it->colum];
+			mymapa.modificar(it->row, it->colum, it->letra);
+			it->fatiga++;
+			movements--;
+			moveback = true;
+		}
+	}
+}
+
 void Player::Input(enti::InputKey a)
 {
 	switch (a)
@@ -20,63 +94,20 @@ void Player::Input(enti::InputKey a)
 	default:
 		if (a == enti::InputKey::w || a == enti::InputKey::W)
 		{
-			if (mymapa.map[it->row - 1][it->colum] != 'X' && mymapa.map[it->row - 1][it->colum] != 'O')
-			{
-				mymapa.modificar(it->row, it->colum, it->last_char);
-				it->last_col = it->colum;
-				it->last_row = it->row;
-				it->row--;
-				it->last_char = mymapa.map[it->row][it->colum];
-				mymapa.modificar(it->row, it->colum, it->letra);
-				it->fatiga++;
-				movements--;
-				moveback = true;
-			}
+			Move(a);
 		}
 		else if (a == enti::InputKey::a || a == enti::InputKey::A)
 		{
-			if (mymapa.map[it->row][it->colum - 1] != 'X' && mymapa.map[it->row][it->colum - 1] != 'O')
-			{
-				mymapa.modificar(it->row, it->colum, it->last_char);
-				it->last_col = it->colum;
-				it->last_row = it->row;
-				it->colum--;
-				it->last_char = mymapa.map[it->row][it->colum];
-				mymapa.modificar(it->row, it->colum, it->letra);
-				it->fatiga++;
-				movements--;
-				moveback = true;
-			}
+			Move(a);
 		}
 		else if (a == enti::InputKey::s || a == enti::InputKey::S)
 		{
-			if (mymapa.map[it->row + 1][it->colum] != 'X' && mymapa.map[it->row + 1][it->colum] != 'O')
-			{
-				mymapa.modificar(it->row, it->colum, it->last_char);
-				it->last_col = it->colum;
-				it->last_row = it->row;
-				it->row++;
-				it->last_char = mymapa.map[it->row][it->colum];
-				mymapa.modificar(it->row, it->colum, it->letra);
-				it->fatiga++;
-				movements--;
-				moveback = true;
-			}
+			Move(a);
 		}
 		else if (a == enti::InputKey::d || a == enti::InputKey::D)
 		{
-			if (mymapa.map[it->row][it->colum + 1] != 'X' && mymapa.map[it->row][it->colum + 1] != 'O')
-			{
-				mymapa.modificar(it->row, it->colum, it->last_char);
-				it->last_col = it->colum;
-				it->last_row = it->row;
-				it->colum++;
-				it->last_char = mymapa.map[it->row][it->colum];
-				mymapa.modificar(it->row, it->colum, it->letra);
-				it->fatiga++;
-				movements--;
-				moveback = true;
-			}
+			Move(a);
+		}
 		else if((a == enti::InputKey::z || a == enti::InputKey::Z))
 		{
 			controlZX();
@@ -88,7 +119,6 @@ void Player::Input(enti::InputKey a)
 		break;
 	}
 	
-	}
 }
 
 Player::Player(bool letras, Mapa &a): mymapa(a)

@@ -4,14 +4,59 @@
 
 void Player::changeentio()
 {
+
+
+
 }
 
 void Player::ataque()
 {
+
+
+
 }
 
 void Player::controlZX()
 {
+
+	if (moveback == true){
+
+		int aux1;
+		int aux2;
+
+		mymapa.modificar(it->row, it->colum, it->last_char);
+		it->last_char = mymapa.map[it->last_row][it->last_col];
+		mymapa.modificar(it->last_row, it->last_col, it->letra);
+		aux1 = it->row;
+		aux2 = it->colum;
+		it->row = it->last_row;
+		it->colum = it->last_col;
+		it->last_row = aux1;
+		it->last_col = aux2;
+		movements++;
+		moveback = false;
+		moveforward = true;
+
+	} else if (moveforward == true){
+
+		int aux1;
+		int aux2;
+
+		mymapa.modificar(it->row, it->colum, it->last_char);
+		it->last_char = mymapa.map[it->last_row][it->last_col];
+		mymapa.modificar(it->last_row, it->last_col, it->letra);
+		aux1 = it->row;
+		aux2 = it->colum;
+		it->row = it->last_row;
+		it->colum = it->last_col;
+		it->last_row = aux1;
+		it->last_col = aux2;
+		movements--;
+		moveback = true;
+		moveforward = false;
+
+	}
+	
 }
 
 void Player::Move(enti::InputKey a)
@@ -21,6 +66,8 @@ void Player::Move(enti::InputKey a)
 		if (mymapa.map[it->row - 1][it->colum] != 'X' && mymapa.map[it->row - 1][it->colum] != 'O')
 		{
 			mymapa.modificar(it->row, it->colum, it->last_char);
+			it->last_col = it->colum;
+			it->last_row = it->row;
 			it->row--;
 			it->last_char = mymapa.map[it->row][it->colum];
 			mymapa.modificar(it->row, it->colum, it->letra);
@@ -157,4 +204,5 @@ Player::Player(bool letras, Mapa &a): mymapa(a)
 
 Player::~Player()
 {
+
 }

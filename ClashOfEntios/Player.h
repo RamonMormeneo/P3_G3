@@ -18,6 +18,7 @@ public:
 		int last_row;
 		char last_char='.';
 	};
+
 	std::list <entio> entios;
 	int movements=10;
 	Mapa &mymapa;

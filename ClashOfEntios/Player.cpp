@@ -5,15 +5,66 @@
 void Player::changeentio()
 {
 
+	if (it == entios.end()){
 
+		it = entios.begin();
+	}
+	else {
+		it++;
+	}
 
+	movements--;
 }
 
 void Player::ataque()
 {
+	enti::InputKey num;
+	enti::cout << enti::Color::MAGENTA << "1 - Sword" << enti::endl;
+	enti::cout << enti::Color::MAGENTA << "2 - Bow" << enti::endl;
+	num = enti::getInputKey();
+
+	if (num == enti::InputKey::NUM1){
+
+		enti::cout << enti::Color::BROWN << "Select direction to attack: W, A, S, D" << enti::endl;
+		num = enti::getInputKey();
+
+		switch (num)
+		{
+		case enti::InputKey::w:
 
 
 
+
+			break;
+		case enti::InputKey::W:
+			break;
+		case enti::InputKey::a:
+			break;
+		case enti::InputKey::A:
+			break;
+		case enti::InputKey::s:
+			break;
+		case enti::InputKey::S:
+			break;
+		case enti::InputKey::d:
+			break;
+		case enti::InputKey::D:
+			break;
+		default:
+			break;
+		}
+		
+
+	}
+
+	else if (num == enti::InputKey::NUM2){
+
+
+	}
+
+	else{
+		ataque();
+	}
 }
 
 void Player::controlZX()
@@ -202,7 +253,39 @@ Player::Player(bool letras, Mapa &a): mymapa(a)
 	it= entios.begin();
 }
 
+
+void Player::reorder(){
+
+	std::list<entio>::iterator it2 = entios.begin();
+	entio aux;
+	bool maspeque = false;
+
+
+	for (int i = 0; i < entios.size() - 1; i++){
+
+		std::list<entio>::iterator it3 = it2;
+		it3++;
+
+		for (int j = i + 1; j < entios.size(); j++){
+
+			if (it3->fatiga < it2->fatiga){
+
+				maspeque = true;
+			}
+
+			if (maspeque){
+				aux = *it2;
+				*it2 = *it3;
+				*it3 = aux;
+			}
+			it3++;
+		}
+		it2++;
+	}
+}
+
+
 Player::~Player()
 {
-
 }
+

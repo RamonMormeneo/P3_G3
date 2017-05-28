@@ -16,54 +16,192 @@ void Player::changeentio()
 	movements--;
 }
 
-void Player::ataque()
+void Player::ataque(std::list <entio> a)
 {
 	enti::InputKey num;
 	enti::cout << enti::Color::MAGENTA << "1 - Sword" << enti::endl;
 	enti::cout << enti::Color::MAGENTA << "2 - Bow" << enti::endl;
+	bool hit;
 	num = enti::getInputKey();
 
-	if (num == enti::InputKey::NUM1){
+	if (num == enti::InputKey::NUM1) {
 
 		enti::cout << enti::Color::BROWN << "Select direction to attack: W, A, S, D" << enti::endl;
 		num = enti::getInputKey();
-
-		switch (num)
+		if (num == enti::InputKey::w || num == enti::InputKey::W)
 		{
-		case enti::InputKey::w:
-
-
-
-
-			break;
-		case enti::InputKey::W:
-			break;
-		case enti::InputKey::a:
-			break;
-		case enti::InputKey::A:
-			break;
-		case enti::InputKey::s:
-			break;
-		case enti::InputKey::S:
-			break;
-		case enti::InputKey::d:
-			break;
-		case enti::InputKey::D:
-			break;
-		default:
-			break;
+			int objectiverow = it->row - 1;
+			int objectivecol = it->colum;
+			for (std::list<entio>::iterator i = a.begin(); i != a.end(); i++)
+			{
+				if (objectiverow == i->row && objectivecol == i->colum)
+				{
+					enti::cout << "You have slain the entio" << i->letra << enti::endl;
+					a.erase(i);
+				}
+			}
 		}
-		
-
+		else if (num == enti::InputKey::s || num == enti::InputKey::S)
+		{
+			int objectiverow = it->row + 1;
+			int objectivecol = it->colum;
+			for (std::list<entio>::iterator i = a.begin(); i != a.end(); i++)
+			{
+				if (objectiverow == i->row && objectivecol == i->colum)
+				{
+					enti::cout << "You have slain the entio" << i->letra << enti::endl;
+					a.erase(i);
+				}
+			}
+		}
+		else if (num == enti::InputKey::a || num == enti::InputKey::A)
+		{
+			int objectiverow = it->row;
+			int objectivecol = it->colum - 1;
+			for (std::list<entio>::iterator i = a.begin(); i != a.end(); i++)
+			{
+				if (objectiverow == i->row && objectivecol == i->colum)
+				{
+					enti::cout << "You have slain the entio" << i->letra << enti::endl;
+					a.erase(i);
+				}
+			}
+		}
+		else if (num == enti::InputKey::d || num == enti::InputKey::D)
+		{
+			int objectiverow = it->row;
+			int objectivecol = it->colum + 1;
+			for (std::list<entio>::iterator i = a.begin(); i != a.end(); i++)
+			{
+				if (objectiverow == i->row && objectivecol == i->colum)
+				{
+					enti::cout << "You have slain the entio" << i->letra << enti::endl;
+					a.erase(i);
+				}
+			}
+		}
+		movements--;
 	}
 
-	else if (num == enti::InputKey::NUM2){
+	else if (num == enti::InputKey::NUM2)
+	{
+		enti::cout << enti::Color::BROWN << "Select direction to attack: W, A, S, D" << enti::endl;
+		num = enti::getInputKey();
+		bool hit = false;
 
-
-	}
-
-	else{
-		ataque();
+		if (num == enti::InputKey::w || num == enti::InputKey::W)
+		{
+			int objectiverow = it->row - 3;
+			int objectivecol = it->colum;
+			if (objectiverow > 0)
+			{
+				int aux = 8;
+				while (objectiverow > objectiverow - 7 && mymapa.map[objectiverow][objectivecol] != 'X')
+				{
+					for (std::list<entio>::iterator i = a.begin(); i != a.end(); i++)
+					{
+						if (objectiverow == i->row && objectivecol == i->colum && !hit)
+						{
+							i->life -= aux;
+							enti::cout << "The damage done to the entio" << i->letra << "is" << aux << "current entio life" << i->life << enti::endl;
+							if (i->life == 0)
+							{
+								enti::cout << "You have slain the entio" << i->letra << enti::endl;
+								a.erase(i);
+							}
+							hit = true;
+						}
+					}
+					objectiverow--;
+					aux--;
+				}
+			}
+			else if (num == enti::InputKey::s || num == enti::InputKey::S)
+			{
+				int objectiverow = it->row + 3;
+				int objectivecol = it->colum;
+				if (objectiverow < mymapa.max_rows)
+				{
+					int aux = 8;
+					while (objectiverow > objectiverow + 7 && mymapa.map[objectiverow][objectivecol] != 'X')
+					{
+						for (std::list<entio>::iterator i = a.begin(); i != a.end(); i++)
+						{
+							if (objectiverow == i->row && objectivecol == i->colum && !hit)
+							{
+								i->life -= aux;
+								enti::cout << "The damage done to the entio" << i->letra << "is" << aux << "current entio life" << i->life << enti::endl;
+								if (i->life == 0)
+								{
+									enti::cout << "You have slain the entio" << i->letra << enti::endl;
+									a.erase(i);
+								}
+								hit = true;
+							}
+						}
+						objectiverow++;
+						aux--;
+					}
+				}
+			}
+			else if (num == enti::InputKey::a || num == enti::InputKey::A)
+			{
+				int objectiverow = it->row;
+				int objectivecol = it->colum-3;
+				if (objectiverow > 0)
+				{
+					int aux = 8;
+					while (objectiverow > objectiverow - 7 && mymapa.map[objectiverow][objectivecol] != 'X')
+					{
+						for (std::list<entio>::iterator i = a.begin(); i != a.end(); i++)
+						{
+							if (objectiverow == i->row && objectivecol == i->colum && !hit)
+							{
+								i->life -= aux;
+								enti::cout << "The damage done to the entio" << i->letra << "is" << aux << "current entio life" << i->life << enti::endl;
+								if (i->life == 0)
+								{
+									enti::cout << "You have slain the entio" << i->letra << enti::endl;
+									a.erase(i);
+								}
+								hit = true;
+							}
+						}
+						objectiverow--;
+						aux--;
+					}
+				}
+			}
+			else if (num == enti::InputKey::d || num == enti::InputKey::D)
+			{
+				int objectiverow = it->row;
+				int objectivecol = it->colum+3;
+				if (objectiverow < mymapa.max_cols)
+				{
+					int aux = 8;
+					while (objectiverow > objectiverow + 7 && mymapa.map[objectiverow][objectivecol] != 'X')
+					{
+						for (std::list<entio>::iterator i = a.begin(); i != a.end(); i++)
+						{
+							if (objectiverow == i->row && objectivecol == i->colum && !hit)
+							{
+								i->life -= aux;
+								enti::cout << "The damage done to the entio" << i->letra << "is" << aux << "current entio life" << i->life << enti::endl;
+								if (i->life == 0)
+								{
+									enti::cout << "You have slain the entio" << i->letra << enti::endl;
+									a.erase(i);
+								}
+								hit = true;
+							}
+						}
+						objectiverow++;
+						aux--;
+					}
+				}
+			}
+		}
+		it->arrows--;
 	}
 }
 
@@ -174,7 +312,7 @@ void Player::Move(enti::InputKey a)
 	}
 }
 
-void Player::Input(enti::InputKey a)
+void Player::Input(enti::InputKey a, Player b)
 {
 	switch (a)
 	{
@@ -184,7 +322,7 @@ void Player::Input(enti::InputKey a)
 		changeentio();
 		break;
 	case enti::InputKey::SPACEBAR:
-		ataque();
+		ataque(b.entios);
 		break;
 	case enti::InputKey::ESC:
 		exit(0);

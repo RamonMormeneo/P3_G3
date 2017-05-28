@@ -24,12 +24,12 @@ public:
 	Mapa &mymapa;
 	void reorder();
 	void changeentio();
-	void ataque();
+	void ataque(std::list <entio> a);
 	void controlZX();
 	bool moveback;
 	bool moveforward;
 	void Move(enti::InputKey a);
-	void Input(enti::InputKey a);
+	void Input(enti::InputKey a,Player b);
 	std::list<entio>::iterator it;
 	Player(bool letras, Mapa &a);
 	~Player();

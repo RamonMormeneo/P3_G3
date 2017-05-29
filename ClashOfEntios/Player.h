@@ -30,7 +30,7 @@ public:
 	bool moveforward;
 	void Move(enti::InputKey a);
 	void Input(enti::InputKey a,Player b);
-	std::list<entio>::iterator it;
+	std::list<entio>::iterator it,it2;
 	Player(bool letras, Mapa &a);
 	~Player();
 };

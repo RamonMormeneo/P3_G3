@@ -43,11 +43,11 @@ void Mapa::print(bool p1turn, char entio)
 				break;
 				
 			}
-			std::cout << map[i][j]<< ' ';
+			enti::cout << map[i][j]<< ' ';
 		}
-		std::cout << std::endl;
+		enti::cout << enti::endl;
 	}
-	/*enti::cout << enti::cend;*/
+	enti::cout << enti::cend;
 }
 
 void Mapa::modificar(int row, int col, char simbol)

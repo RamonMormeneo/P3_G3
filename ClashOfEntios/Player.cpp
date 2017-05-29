@@ -4,15 +4,14 @@
 
 void Player::changeentio()
 {
-
-	if (it == entios.end()){
-
+	if (it != it2){
+		it++;
+		
+	}
+	else if (it == it2)
+	{
 		it = entios.begin();
 	}
-	else {
-		it++;
-	}
-
 	movements--;
 }
 
@@ -21,13 +20,23 @@ void Player::ataque(std::list <entio> a)
 	enti::InputKey num;
 	enti::cout << enti::Color::MAGENTA << "1 - Sword" << enti::endl;
 	enti::cout << enti::Color::MAGENTA << "2 - Bow" << enti::endl;
+	enti::cout << enti::cend;
 	bool hit;
-	num = enti::getInputKey();
-
+	num= enti::getInputKey();
+	while (num == enti::InputKey::NONE)
+	{
+		num = enti::getInputKey();
+	}
+	
 	if (num == enti::InputKey::NUM1) {
 
 		enti::cout << enti::Color::BROWN << "Select direction to attack: W, A, S, D" << enti::endl;
+		enti::cout << enti::cend;
 		num = enti::getInputKey();
+		while (num == enti::InputKey::NONE)
+		{
+			num = enti::getInputKey();
+		}
 		if (num == enti::InputKey::w || num == enti::InputKey::W)
 		{
 			int objectiverow = it->row - 1;
@@ -36,7 +45,8 @@ void Player::ataque(std::list <entio> a)
 			{
 				if (objectiverow == i->row && objectivecol == i->colum)
 				{
-					enti::cout << "You have slain the entio" << i->letra << enti::endl;
+					enti::cout << enti::Color::BROWN << "You have slain the entio " << i->letra << enti::endl;
+				
 					a.erase(i);
 				}
 			}
@@ -49,7 +59,8 @@ void Player::ataque(std::list <entio> a)
 			{
 				if (objectiverow == i->row && objectivecol == i->colum)
 				{
-					enti::cout << "You have slain the entio" << i->letra << enti::endl;
+					enti::cout << enti::Color::BROWN << "You have slain the entio " << i->letra << enti::endl;
+					enti::cout << enti::cend; 
 					a.erase(i);
 				}
 			}
@@ -62,7 +73,8 @@ void Player::ataque(std::list <entio> a)
 			{
 				if (objectiverow == i->row && objectivecol == i->colum)
 				{
-					enti::cout << "You have slain the entio" << i->letra << enti::endl;
+					enti::cout << enti::Color::BROWN << "You have slain the entio " << i->letra << enti::endl;
+					enti::cout << enti::cend;
 					a.erase(i);
 				}
 			}
@@ -75,7 +87,8 @@ void Player::ataque(std::list <entio> a)
 			{
 				if (objectiverow == i->row && objectivecol == i->colum)
 				{
-					enti::cout << "You have slain the entio" << i->letra << enti::endl;
+					enti::cout << enti::Color::BROWN << "You have slain the entio " << i->letra << enti::endl;
+					enti::cout << enti::cend;
 					a.erase(i);
 				}
 			}
@@ -86,7 +99,12 @@ void Player::ataque(std::list <entio> a)
 	else if (num == enti::InputKey::NUM2)
 	{
 		enti::cout << enti::Color::BROWN << "Select direction to attack: W, A, S, D" << enti::endl;
+		enti::cout << enti::cend;
 		num = enti::getInputKey();
+		while (num == enti::InputKey::NONE)
+		{
+			num = enti::getInputKey();
+		}
 		bool hit = false;
 
 		if (num == enti::InputKey::w || num == enti::InputKey::W)
@@ -103,10 +121,12 @@ void Player::ataque(std::list <entio> a)
 						if (objectiverow == i->row && objectivecol == i->colum && !hit)
 						{
 							i->life -= aux;
-							enti::cout << "The damage done to the entio" << i->letra << "is" << aux << "current entio life" << i->life << enti::endl;
+							enti::cout << enti::Color::BROWN << "The damage done to the entio " << i->letra << " is " << aux << " current entio life " << i->life << enti::endl;
+							enti::cout << enti::cend;
 							if (i->life == 0)
 							{
-								enti::cout << "You have slain the entio" << i->letra << enti::endl;
+								enti::cout << enti::Color::BROWN << "You have slain the entio " << i->letra << enti::endl;
+								enti::cout << enti::cend;
 								a.erase(i);
 							}
 							hit = true;
@@ -130,10 +150,12 @@ void Player::ataque(std::list <entio> a)
 							if (objectiverow == i->row && objectivecol == i->colum && !hit)
 							{
 								i->life -= aux;
-								enti::cout << "The damage done to the entio" << i->letra << "is" << aux << "current entio life" << i->life << enti::endl;
+								enti::cout << enti::Color::BROWN << "The damage done to the entio " << i->letra << " is " << aux << " current entio life " << i->life << enti::endl;
+								enti::cout << enti::cend;
 								if (i->life == 0)
 								{
-									enti::cout << "You have slain the entio" << i->letra << enti::endl;
+									enti::cout << enti::Color::BROWN << "You have slain the entio " << i->letra << enti::endl;
+									enti::cout << enti::cend;
 									a.erase(i);
 								}
 								hit = true;
@@ -158,10 +180,12 @@ void Player::ataque(std::list <entio> a)
 							if (objectiverow == i->row && objectivecol == i->colum && !hit)
 							{
 								i->life -= aux;
-								enti::cout << "The damage done to the entio" << i->letra << "is" << aux << "current entio life" << i->life << enti::endl;
+								enti::cout << enti::Color::BROWN << "The damage done to the entio " << i->letra << " is " << aux << " current entio life " << i->life << enti::endl;
+								enti::cout << enti::cend;
 								if (i->life == 0)
 								{
-									enti::cout << "You have slain the entio" << i->letra << enti::endl;
+									enti::cout << enti::Color::BROWN << "You have slain the entio" << i->letra << enti::endl;
+									enti::cout << enti::cend;
 									a.erase(i);
 								}
 								hit = true;
@@ -186,10 +210,12 @@ void Player::ataque(std::list <entio> a)
 							if (objectiverow == i->row && objectivecol == i->colum && !hit)
 							{
 								i->life -= aux;
-								enti::cout << "The damage done to the entio" << i->letra << "is" << aux << "current entio life" << i->life << enti::endl;
+								enti::cout << enti::Color::BROWN << "The damage done to the entio " << i->letra << " is " << aux << " current entio life " << i->life << enti::endl;
+								enti::cout << enti::cend;
 								if (i->life == 0)
 								{
-									enti::cout << "You have slain the entio" << i->letra << enti::endl;
+									enti::cout << enti::Color::BROWN << "You have slain the entio " << i->letra << enti::endl;
+									enti::cout << enti::cend;
 									a.erase(i);
 								}
 								hit = true;
@@ -202,6 +228,8 @@ void Player::ataque(std::list <entio> a)
 			}
 		}
 		it->arrows--;
+		movements--;
+		enti::cout << enti::cend;
 	}
 }
 
@@ -389,6 +417,8 @@ Player::Player(bool letras, Mapa &a): mymapa(a)
 		}
 	}
 	it= entios.begin();
+	it2 = entios.end();
+	it2--;
 }
 
 

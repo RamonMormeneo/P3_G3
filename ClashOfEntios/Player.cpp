@@ -239,30 +239,10 @@ void Player::ataque(std::list <entio> a,bool turn)
 		enti::cout << enti::cend;
 	}
 }
-		
 
-void Player::controlZX()
+void Player::controlX()
 {
-
-	if (moveback == true){
-
-		int aux1;
-		int aux2;
-
-		mymapa.modificar(it->row, it->colum, it->last_char);
-		it->last_char = mymapa.map[it->last_row][it->last_col];
-		mymapa.modificar(it->last_row, it->last_col, it->letra);
-		aux1 = it->row;
-		aux2 = it->colum;
-		it->row = it->last_row;
-		it->colum = it->last_col;
-		it->last_row = aux1;
-		it->last_col = aux2;
-		movements++;
-		moveback = false;
-		moveforward = true;
-
-	} else if (moveforward == true){
+	if (moveforward == true && moveback ==false){
 
 		int aux1;
 		int aux2;
@@ -279,6 +259,31 @@ void Player::controlZX()
 		movements--;
 		moveback = true;
 		moveforward = false;
+
+	}
+}
+		
+
+void Player::controlZ()
+{
+
+	if (moveback == true && moveforward==false){
+
+		int aux1;
+		int aux2;
+
+		mymapa.modificar(it->row, it->colum, it->last_char);
+		it->last_char = mymapa.map[it->last_row][it->last_col];
+		mymapa.modificar(it->last_row, it->last_col, it->letra);
+		aux1 = it->row;
+		aux2 = it->colum;
+		it->row = it->last_row;
+		it->colum = it->last_col;
+		it->last_row = aux1;
+		it->last_col = aux2;
+		movements++;
+		moveback = false;
+		moveforward = true;
 
 	}
 	
@@ -382,11 +387,11 @@ void Player::Input(enti::InputKey a, Player b, bool turn)
 		}
 		else if((a == enti::InputKey::z || a == enti::InputKey::Z))
 		{
-			controlZX();
+			controlZ();
 		}
 		else if ((a == enti::InputKey::x || a == enti::InputKey::X))
 		{
-			controlZX();
+			controlX();
 		}
 		break;
 	}

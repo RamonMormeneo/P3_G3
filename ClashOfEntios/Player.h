@@ -25,7 +25,8 @@ public:
 	void reorder();
 	void changeentio();
 	void ataque(std::list <entio> a, bool turn);
-	void controlZX();
+	void controlX();
+	void controlZ();
 	bool moveback;
 	bool moveforward;
 	void Move(enti::InputKey a);

@@ -31,6 +31,8 @@ void main()
 	enti::cout << enti::Color::LIGHTMAGENTA << "Press any key to begin the game!" << enti::endl;
 	enti::cout << enti::cend;
 	enti::systemPause();
+	a.print(p1turn, p1.it->letra);
+	enti::cout << enti::cend;
 	while (!endgame)
 	{
 		if (p1turn)
@@ -41,19 +43,21 @@ void main()
 				startturn = false;
 			}
 			enti::InputKey num;
-			a.print(p1turn, p1.it->letra);
+		
 			num = enti::getInputKey();
 			while (num == enti::InputKey::NONE)
 			{
 				num = enti::getInputKey();
 			}
-			p1.Input(num, p2);
+			p1.Input(num, p2,p1turn);
 			if (p1.movements == 0)
 			{
 				p1turn = false;
 				startturn = true;
 				p1.movements = 10;
 			}
+			a.print(p1turn, p1.it->letra);
+			enti::cout << enti::cend;
 		}
 		else {
 			if (startturn){
@@ -61,20 +65,20 @@ void main()
 				startturn = false;
 			}
 		enti::InputKey num;
-		a.print(p1turn, p2.it->letra);
 		num = enti::getInputKey();
 		while (num == enti::InputKey::NONE)
 		{
 			num = enti::getInputKey();
 		}
-		p2.Input(num, p1);
+		p2.Input(num, p1,p1turn);
 		if (p2.movements == 0)
 		{
 			p1turn = true;
 			startturn = true;
 			p2.movements = 10;
 		}
-
+		a.print(p1turn, p2.it->letra);
+		enti::cout << enti::cend;
 		}
 	}
 }

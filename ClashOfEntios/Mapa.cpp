@@ -47,7 +47,6 @@ void Mapa::print(bool p1turn, char entio)
 		}
 		enti::cout << enti::endl;
 	}
-	enti::cout << enti::cend;
 }
 
 void Mapa::modificar(int row, int col, char simbol)

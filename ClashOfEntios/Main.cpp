@@ -50,14 +50,17 @@ void main()
 				num = enti::getInputKey();
 			}
 			p1.Input(num, p2,p1turn);
+			a.print(p1turn, p1.it->letra);
+			enti::cout << enti::cend;
 			if (p1.movements == 0)
 			{
 				p1turn = false;
 				startturn = true;
 				p1.movements = 10;
+				a.print(p1turn, p2.it->letra);
+				enti::cout << enti::cend;
 			}
-			a.print(p1turn, p1.it->letra);
-			enti::cout << enti::cend;
+			
 		}
 		else {
 			if (startturn){
@@ -71,14 +74,16 @@ void main()
 			num = enti::getInputKey();
 		}
 		p2.Input(num, p1,p1turn);
+		a.print(p1turn, p2.it->letra);
+		enti::cout << enti::cend;
 		if (p2.movements == 0)
 		{
 			p1turn = true;
 			startturn = true;
 			p2.movements = 10;
+			a.print(p1turn, p1.it->letra);
+			enti::cout << enti::cend;
 		}
-		a.print(p1turn, p2.it->letra);
-		enti::cout << enti::cend;
 		}
 	}
 }

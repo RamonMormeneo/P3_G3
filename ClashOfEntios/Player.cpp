@@ -15,14 +15,14 @@ void Player::changeentio()
 	movements--;
 }
 
-void Player::ataque(std::list <entio> a,bool turn)
+void Player::ataque(Player &a,bool turn)
 {
 	enti::InputKey num;
 	mymapa.print(turn,it->letra);
 	enti::cout << enti::Color::MAGENTA << "1 - Sword" << enti::endl;
 	enti::cout << enti::Color::MAGENTA << "2 - Bow" << enti::endl;
 	enti::cout << enti::cend;
-	bool hit;
+	/*bool hit;*/
 	num = enti::getInputKey();
 	while (num == enti::InputKey::NONE)
 	{
@@ -30,6 +30,7 @@ void Player::ataque(std::list <entio> a,bool turn)
 	}
 
 	if (num == enti::InputKey::NUM1) {
+		int dmg = 10;
 		mymapa.print(turn, it->letra);
 		enti::cout << enti::Color::BROWN << "Select direction to attack: W, A, S, D" << enti::endl;
 		enti::cout << enti::cend;
@@ -42,14 +43,13 @@ void Player::ataque(std::list <entio> a,bool turn)
 		{
 			int objectiverow = it->row - 1;
 			int objectivecol = it->colum;
-			for (std::list<entio>::iterator i = a.begin(); i != a.end(); i++)
+			for (std::list<entio>::iterator i = a.entios.begin(); i != a.entios.end(); i++)
 			{
 				if (objectiverow == i->row && objectivecol == i->colum)
 				{
 					mymapa.print(turn, it->letra);
 					enti::cout << enti::Color::BROWN << "You have slain the entio " << i->letra << enti::endl;
 					enti::cout << enti::cend;
-					a.erase(i);
 				}
 			}
 		}
@@ -57,14 +57,13 @@ void Player::ataque(std::list <entio> a,bool turn)
 		{
 			int objectiverow = it->row + 1;
 			int objectivecol = it->colum;
-			for (std::list<entio>::iterator i = a.begin(); i != a.end(); i++)
+			for (std::list<entio>::iterator i = a.entios.begin(); i != a.entios.end(); i++)
 			{
 				if (objectiverow == i->row && objectivecol == i->colum)
 				{
 					mymapa.print(turn, it->letra);
 					enti::cout << enti::Color::BROWN << "You have slain the entio " << i->letra << enti::endl;
 					enti::cout << enti::cend;
-					a.erase(i);
 				}
 			}
 		}
@@ -72,14 +71,13 @@ void Player::ataque(std::list <entio> a,bool turn)
 		{
 			int objectiverow = it->row;
 			int objectivecol = it->colum - 1;
-			for (std::list<entio>::iterator i = a.begin(); i != a.end(); i++)
+			for (std::list<entio>::iterator i = a.entios.begin(); i != a.entios.end(); i++)
 			{
 				if (objectiverow == i->row && objectivecol == i->colum)
 				{
 					mymapa.print(turn, it->letra);
 					enti::cout << enti::Color::BROWN << "You have slain the entio " << i->letra << enti::endl;
 					enti::cout << enti::cend;
-					a.erase(i);
 				}
 			}
 		}
@@ -87,20 +85,22 @@ void Player::ataque(std::list <entio> a,bool turn)
 		{
 			int objectiverow = it->row;
 			int objectivecol = it->colum + 1;
-			for (std::list<entio>::iterator i = a.begin(); i != a.end(); i++)
+			for (std::list<entio>::iterator i = a.entios.begin(); i != a.entios.end(); i++)
 			{
 				if (objectiverow == i->row && objectivecol == i->colum)
 				{
 					mymapa.print(turn, it->letra);
 					enti::cout << enti::Color::BROWN << "You have slain the entio " << i->letra << enti::endl;
 					enti::cout << enti::cend;
-					a.erase(i);
+					std::list<entio>::iterator kill = i;
+					i--;
+					a.dmg(dmg, kill);
 				}
 			}
 		}
 		movements--;
 	}
-
+	/*
 	else if (num == enti::InputKey::NUM2)
 	{
 		mymapa.print(turn, it->letra);
@@ -238,6 +238,17 @@ void Player::ataque(std::list <entio> a,bool turn)
 		movements--;
 		enti::cout << enti::cend;
 	}
+	*/
+}
+
+void Player::dmg(int a, std::list <entio>::iterator &it)
+{
+	it->life -= a;
+	if (it->life == 0)
+	{
+		mymapa.modificar(it->row, it->last_col, it->last_char);
+		entios.erase(it);
+	}
 }
 
 void Player::controlX()
@@ -363,7 +374,7 @@ void Player::Input(enti::InputKey a, Player b, bool turn)
 		changeentio();
 		break;
 	case enti::InputKey::SPACEBAR:
-		ataque(b.entios,turn);
+		ataque(b,turn);
 		break;
 	case enti::InputKey::ESC:
 		exit(0);

@@ -24,7 +24,8 @@ public:
 	Mapa &mymapa;
 	void reorder();
 	void changeentio();
-	void ataque(std::list <entio> a, bool turn);
+	void ataque(Player &a, bool turn);
+	void dmg(int a,std::list <entio>::iterator &it);
 	void controlX();
 	void controlZ();
 	bool moveback;

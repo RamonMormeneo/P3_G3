@@ -25,7 +25,6 @@ public:
 	void reorder();
 	void changeentio();
 	void ataque(Player &a, bool turn);
-	void dmg(int a,std::list <entio>::iterator &it);
 	void controlX();
 	void controlZ();
 	bool moveback;

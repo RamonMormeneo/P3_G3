@@ -21,235 +21,423 @@ void Player::ataque(Player &a,bool turn)
 	mymapa.print(turn,it->letra);
 	enti::cout << enti::Color::MAGENTA << "1 - Sword" << enti::endl;
 	enti::cout << enti::Color::MAGENTA << "2 - Bow" << enti::endl;
-	enti::cout << enti::cend;
-	/*bool hit;*/
+	enti::cout<< enti::cend;
 	num = enti::getInputKey();
 	while (num == enti::InputKey::NONE)
 	{
 		num = enti::getInputKey();
 	}
-
-	if (num == enti::InputKey::NUM1) {
-		int dmg = 10;
+	if (num== enti::InputKey::NUM1)
+	{
 		mymapa.print(turn, it->letra);
-		enti::cout << enti::Color::BROWN << "Select direction to attack: W, A, S, D" << enti::endl;
+		enti::cout << enti::Color::MAGENTA << "1 - UP" << enti::endl;
+		enti::cout << enti::Color::MAGENTA << "2 - DOWN" << enti::endl;
+		enti::cout << enti::Color::MAGENTA << "3 - LEFT" << enti::endl;
+		enti::cout << enti::Color::MAGENTA << "4 - RIGTH" << enti::endl;
 		enti::cout << enti::cend;
 		num = enti::getInputKey();
 		while (num == enti::InputKey::NONE)
 		{
 			num = enti::getInputKey();
 		}
-		if (num == enti::InputKey::w || num == enti::InputKey::W)
+		if (num == enti::InputKey::NUM1)
 		{
 			int objectiverow = it->row - 1;
 			int objectivecol = it->colum;
-			for (std::list<entio>::iterator i = a.entios.begin(); i != a.entios.end(); i++)
+			bool hit = false;
+			std::list<entio>::iterator enemy = a.entios.begin();
+			while (!hit)
 			{
-				if (objectiverow == i->row && objectivecol == i->colum)
+				if (objectiverow == enemy->row&&objectivecol == enemy->colum)
 				{
+					std::list <entio>::iterator aux = enemy;
 					mymapa.print(turn, it->letra);
-					enti::cout << enti::Color::BROWN << "You have slain the entio " << i->letra << enti::endl;
-					enti::cout << enti::cend;
+					enti::cout << enti::Color::MAGENTA << "Entio Killed:"<< enemy->letra << enti::endl;
+					enemy++;
+					mymapa.modificar(objectiverow, objectivecol, aux->last_char);
+					a.entios.erase(aux);
+					hit = true;
+				}
+				else
+				{
+					enemy++;
+				}
+				if (enemy == a.entios.end())
+				{
+					
+					if (!hit)
+					{
+						mymapa.print(turn, it->letra);
+						enti::cout << enti::Color::MAGENTA << "You Failed" << enti::endl;
+					}
+					hit = true;
 				}
 			}
 		}
-		else if (num == enti::InputKey::s || num == enti::InputKey::S)
+		if (num == enti::InputKey::NUM2)
 		{
 			int objectiverow = it->row + 1;
 			int objectivecol = it->colum;
-			for (std::list<entio>::iterator i = a.entios.begin(); i != a.entios.end(); i++)
+			bool hit = false;
+			std::list<entio>::iterator enemy = a.entios.begin();
+			while (!hit)
 			{
-				if (objectiverow == i->row && objectivecol == i->colum)
+				if (objectiverow == enemy->row&&objectivecol == enemy->colum)
 				{
+					std::list <entio>::iterator aux = enemy;
 					mymapa.print(turn, it->letra);
-					enti::cout << enti::Color::BROWN << "You have slain the entio " << i->letra << enti::endl;
-					enti::cout << enti::cend;
+					enti::cout << enti::Color::MAGENTA << "Entio Killed:" << enemy->letra << enti::endl;
+					enemy++;
+					mymapa.modificar(objectiverow, objectivecol, aux->last_char);
+					a.entios.erase(aux);
+					hit = true;
+				}
+				else
+				{
+					enemy++;
+				}
+				if (enemy == a.entios.end())
+				{
+					
+					if (!hit)
+					{
+						mymapa.print(turn, it->letra);
+						enti::cout << enti::Color::MAGENTA << "You Failed" << enti::endl;
+					}
+					hit = true;
 				}
 			}
 		}
-		else if (num == enti::InputKey::a || num == enti::InputKey::A)
+		if (num == enti::InputKey::NUM3)
 		{
 			int objectiverow = it->row;
-			int objectivecol = it->colum - 1;
-			for (std::list<entio>::iterator i = a.entios.begin(); i != a.entios.end(); i++)
+			int objectivecol = it->colum-1;
+			bool hit = false;
+			std::list<entio>::iterator enemy = a.entios.begin();
+			while (!hit)
 			{
-				if (objectiverow == i->row && objectivecol == i->colum)
+				if (objectiverow == enemy->row&&objectivecol == enemy->colum)
 				{
+					std::list <entio>::iterator aux = enemy;
 					mymapa.print(turn, it->letra);
-					enti::cout << enti::Color::BROWN << "You have slain the entio " << i->letra << enti::endl;
-					enti::cout << enti::cend;
+					enti::cout << enti::Color::MAGENTA << "Entio Killed:" << enemy->letra << enti::endl;
+					enemy++;
+					mymapa.modificar(objectiverow, objectivecol, aux->last_char);
+					a.entios.erase(aux);
+					hit = true;
+				}
+				else
+				{
+					enemy++;
+				}
+				if (enemy == a.entios.end())
+				{
+					
+					if (!hit)
+					{
+						mymapa.print(turn, it->letra);
+						enti::cout << enti::Color::MAGENTA << "You Failed" << enti::endl;
+					}
+					hit = true;
 				}
 			}
 		}
-		else if (num == enti::InputKey::d || num == enti::InputKey::D)
+		if (num == enti::InputKey::NUM4)
 		{
 			int objectiverow = it->row;
-			int objectivecol = it->colum + 1;
-			for (std::list<entio>::iterator i = a.entios.begin(); i != a.entios.end(); i++)
+			int objectivecol = it->colum+1;
+			bool hit = false;
+			std::list<entio>::iterator enemy = a.entios.begin();
+			while (!hit)
 			{
-				if (objectiverow == i->row && objectivecol == i->colum)
+				if (objectiverow == enemy->row&&objectivecol == enemy->colum)
 				{
+					std::list <entio>::iterator aux = enemy;
 					mymapa.print(turn, it->letra);
-					enti::cout << enti::Color::BROWN << "You have slain the entio " << i->letra << enti::endl;
-					enti::cout << enti::cend;
-					std::list<entio>::iterator kill = i;
-					i--;
-					a.dmg(dmg, kill);
+					enti::cout << enti::Color::MAGENTA << "Entio Killed:" << enemy->letra << enti::endl;
+					enemy++;
+					mymapa.modificar(objectiverow, objectivecol, aux->last_char);
+					a.entios.erase(aux);
+					hit = true;
+				}
+				else
+				{
+					enemy++;
+				}
+				if (enemy == a.entios.end())
+				{
+					if (!hit)
+					{
+						mymapa.print(turn, it->letra);
+						enti::cout << enti::Color::MAGENTA << "You Failed" << enti::endl;
+					}
+					hit = true;
 				}
 			}
 		}
 		movements--;
 	}
-	/*
-	else if (num == enti::InputKey::NUM2)
+	else if (num == enti::InputKey::NUM2 && it->arrows>0)
 	{
 		mymapa.print(turn, it->letra);
-		enti::cout << enti::Color::BROWN << "Select direction to attack: W, A, S, D" << enti::endl;
+		enti::cout << enti::Color::MAGENTA << "1 - UP" << enti::endl;
+		enti::cout << enti::Color::MAGENTA << "2 - DOWN" << enti::endl;
+		enti::cout << enti::Color::MAGENTA << "3 - LEFT" << enti::endl;
+		enti::cout << enti::Color::MAGENTA << "4 - RIGTH" << enti::endl;
 		enti::cout << enti::cend;
 		num = enti::getInputKey();
 		while (num == enti::InputKey::NONE)
 		{
 			num = enti::getInputKey();
 		}
-		bool hit = false;
-
-		if (num == enti::InputKey::w || num == enti::InputKey::W)
+		if (num == enti::InputKey::NUM1)
 		{
-			int objectiverow = it->row - 3;
+			int dmg = 8;
+			bool end = false;
+			int pos = 3;
+			int maxdistance = 10;
+			int objectiverow = it->row - pos;
 			int objectivecol = it->colum;
 			if (objectiverow > 0)
 			{
-				int aux = 8;
-				while (objectiverow > objectiverow - 7 && mymapa.map[objectiverow][objectivecol] != 'X')
+				while (pos <= maxdistance && !end)
 				{
-					for (std::list<entio>::iterator i = a.begin(); i != a.end(); i++)
+					bool hit = false;
+					int objectiverow = it->row - pos;
+					int objectivecol = it->colum;
+					std::list<entio>::iterator enemy = a.entios.begin();
+					if (mymapa.map[objectiverow][objectivecol] == 'X')
 					{
-						if (objectiverow == i->row && objectivecol == i->colum && !hit)
+						hit = true;
+						end = true;
+						mymapa.print(turn, it->letra);
+						enti::cout << enti::Color::MAGENTA << "YOU MISS" << enemy->letra << enti::endl;
+					}
+					while (!hit)
+					{
+						if (objectiverow == enemy->row&&objectivecol == enemy->colum)
 						{
-							i->life -= aux;
 							mymapa.print(turn, it->letra);
-							enti::cout << enti::Color::BROWN << "The damage done to the entio " << i->letra << " is " << aux << " current entio life " << i->life << enti::endl;
-							
-							if (i->life == 0)
-							{
-								enti::cout << enti::Color::BROWN << "You have slain the entio " << i->letra << enti::endl;
-								a.erase(i);
-							}
+							enti::cout << enti::Color::MAGENTA << "HIT ENTIO" << enemy->letra << enti::endl;
+							enti::cout << enti::Color::MAGENTA << "DMG" << dmg << enti::endl;
 							hit = true;
+							end = true;
+							if (enemy->life <= 0)
+							{
+								std::list <entio>::iterator aux = enemy;
+								mymapa.print(turn, it->letra);
+								enti::cout << enti::Color::MAGENTA << "Entio Killed:" << enti::endl;
+								enemy++;
+								mymapa.modificar(objectiverow, objectivecol, aux->last_char);
+								a.entios.erase(aux);
+							}
+						}
+						else
+						{
+							enemy++;
+						}
+						if (enemy == a.entios.end())
+						{
+							hit = false;
 						}
 					}
-					objectiverow--;
-					aux--;
+					pos++;
+					dmg--;
 				}
 			}
+			if (!end)
+			{
+				enti::cout << enti::Color::MAGENTA << "YOU MISS" << enti::endl;
+			}
 		}
-
-		else if (num == enti::InputKey::s || num == enti::InputKey::S)
+		if (num == enti::InputKey::NUM2)
 		{
-			int objectiverow = it->row + 3;
+			int dmg = 8;
+			bool end = false;
+			int pos = 3;
+			int maxdistance = 10;
+			int objectiverow = it->row + pos;
 			int objectivecol = it->colum;
 			if (objectiverow < mymapa.max_rows)
 			{
-				int aux = 8;
-				while (objectiverow > objectiverow + 7 && mymapa.map[objectiverow][objectivecol] != 'X')
+				while (pos <= maxdistance && !end)
 				{
-					for (std::list<entio>::iterator i = a.begin(); i != a.end(); i++)
+					bool hit = false;
+					int objectiverow = it->row + pos;
+					int objectivecol = it->colum;
+					std::list<entio>::iterator enemy = a.entios.begin();
+					if (mymapa.map[objectiverow][objectivecol] == 'X')
 					{
-						if (objectiverow == i->row && objectivecol == i->colum && !hit)
+						hit = true;
+						end = true;
+						mymapa.print(turn, it->letra);
+						enti::cout << enti::Color::MAGENTA << "YOU MISS" << enemy->letra << enti::endl;
+					}
+					while (!hit)
+					{
+						if (objectiverow == enemy->row&&objectivecol == enemy->colum)
 						{
-							i->life -= aux;
-							enti::cout << enti::Color::BROWN << "The damage done to the entio " << i->letra << " is " << aux << " current entio life " << i->life << enti::endl;
-							enti::cout << enti::cend;
-							if (i->life == 0)
-							{
-								enti::cout << enti::Color::BROWN << "You have slain the entio " << i->letra << enti::endl;
-								enti::cout << enti::cend;
-								a.erase(i);
-							}
+							mymapa.print(turn, it->letra);
+							enti::cout << enti::Color::MAGENTA << "HIT ENTIO" << enemy->letra << enti::endl;
+							enti::cout << enti::Color::MAGENTA << "DMG" << dmg << enti::endl;
 							hit = true;
+							end = true;
+							if (enemy->life <= 0)
+							{
+								std::list <entio>::iterator aux = enemy;
+								mymapa.print(turn, it->letra);
+								enti::cout << enti::Color::MAGENTA << "Entio Killed:" << enti::endl;
+								enemy++;
+								mymapa.modificar(objectiverow, objectivecol, aux->last_char);
+								a.entios.erase(aux);
+							}
+						}
+						else
+						{
+							enemy++;
+						}
+						if (enemy == a.entios.end())
+						{
+							hit = false;
 						}
 					}
-					objectiverow++;
-					aux--;
+					pos++;
+					dmg--;
 				}
 			}
-		}
-		else if (num == enti::InputKey::a || num == enti::InputKey::A)
-		{
-			int objectiverow = it->row;
-			int objectivecol = it->colum - 3;
-			if (objectiverow > 0)
+			if (!end)
 			{
-				int aux = 8;
-				while (objectiverow > objectiverow - 7 && mymapa.map[objectiverow][objectivecol] != 'X')
-				{
-					for (std::list<entio>::iterator i = a.begin(); i != a.end(); i++)
-					{
-						if (objectiverow == i->row && objectivecol == i->colum && !hit)
-						{
-							i->life -= aux;
-							enti::cout << enti::Color::BROWN << "The damage done to the entio " << i->letra << " is " << aux << " current entio life " << i->life << enti::endl;
-							enti::cout << enti::cend;
-							if (i->life == 0)
-							{
-								enti::cout << enti::Color::BROWN << "You have slain the entio" << i->letra << enti::endl;
-								enti::cout << enti::cend;
-								a.erase(i);
-							}
-							hit = true;
-						}
-					}
-					objectiverow--;
-					aux--;
-				}
+				enti::cout << enti::Color::MAGENTA << "YOU MISS" << enti::endl;
 			}
 		}
-		else if (num == enti::InputKey::d || num == enti::InputKey::D)
+		if (num == enti::InputKey::NUM3)
 		{
+			int dmg = 8;
+			bool end = false;
+			int pos = 3;
+			int maxdistance = 10;
 			int objectiverow = it->row;
-			int objectivecol = it->colum + 3;
-			if (objectiverow > 0)
+			int objectivecol = it->colum-pos;
+			if (objectivecol > 0)
 			{
-				int aux = 8;
-				while (objectiverow > objectiverow + 7 && mymapa.map[objectiverow][objectivecol] != 'X')
+				while (pos <= maxdistance && !end)
 				{
-					for (std::list<entio>::iterator i = a.begin(); i != a.end(); i++)
+					bool hit = false;
+					int objectiverow = it->row;
+					int objectivecol = it->colum - pos;
+					std::list<entio>::iterator enemy = a.entios.begin();
+					if (mymapa.map[objectiverow][objectivecol] == 'X')
 					{
-						if (objectiverow == i->row && objectivecol == i->colum && !hit)
+						hit = true;
+						end = true;
+						mymapa.print(turn, it->letra);
+						enti::cout << enti::Color::MAGENTA << "YOU MISS" << enemy->letra << enti::endl;
+					}
+					while (!hit)
+					{
+						if (objectiverow == enemy->row&&objectivecol == enemy->colum)
 						{
-							i->life -= aux;
-							enti::cout << enti::Color::BROWN << "The damage done to the entio " << i->letra << " is " << aux << " current entio life " << i->life << enti::endl;
-							enti::cout << enti::cend;
-							if (i->life == 0)
-							{
-								enti::cout << enti::Color::BROWN << "You have slain the entio" << i->letra << enti::endl;
-								enti::cout << enti::cend;
-								a.erase(i);
-							}
+							mymapa.print(turn, it->letra);
+							enti::cout << enti::Color::MAGENTA << "HIT ENTIO" << enemy->letra << enti::endl;
+							enti::cout << enti::Color::MAGENTA << "DMG" << dmg << enti::endl;
 							hit = true;
+							end = true;
+							if (enemy->life <= 0)
+							{
+								std::list <entio>::iterator aux = enemy;
+								mymapa.print(turn, it->letra);
+								enti::cout << enti::Color::MAGENTA << "Entio Killed:" << enti::endl;
+								enemy++;
+								mymapa.modificar(objectiverow, objectivecol, aux->last_char);
+								a.entios.erase(aux);
+							}
+						}
+						else
+						{
+							enemy++;
+						}
+						if (enemy == a.entios.end())
+						{
+							hit = false;
 						}
 					}
-					objectiverow++;
-					aux--;
+					pos++;
+					dmg--;
 				}
 			}
+			if (!end)
+			{
+				enti::cout << enti::Color::MAGENTA << "YOU MISS" << enti::endl;
+			}
 		}
-		it->arrows--;
+		if (num == enti::InputKey::NUM4)
+		{
+			int dmg = 8;
+			bool end = false;
+			int pos = 3;
+			int maxdistance = 10;
+			int objectiverow = it->row;
+			int objectivecol = it->colum + pos;
+			if (objectivecol < mymapa.max_cols)
+			{
+				while (pos <= maxdistance && !end)
+				{
+					bool hit = false;
+					int objectiverow = it->row;
+					int objectivecol = it->colum + pos;
+					std::list<entio>::iterator enemy = a.entios.begin();
+					if (mymapa.map[objectiverow][objectivecol] == 'X')
+					{
+						hit = true;
+						end = true;
+						mymapa.print(turn, it->letra);
+						enti::cout << enti::Color::MAGENTA << "YOU MISS" << enemy->letra << enti::endl;
+					}
+					while (!hit)
+					{
+						if (objectiverow == enemy->row&&objectivecol == enemy->colum)
+						{
+							mymapa.print(turn, it->letra);
+							enti::cout << enti::Color::MAGENTA << "HIT ENTIO" << enemy->letra << enti::endl;
+							enti::cout << enti::Color::MAGENTA << "DMG" << dmg << enti::endl;
+							hit = true;
+							end = true;
+							if (enemy->life <= 0)
+							{
+								std::list <entio>::iterator aux = enemy;
+								mymapa.print(turn, it->letra);
+								enti::cout << enti::Color::MAGENTA << "Entio Killed:" << enti::endl;
+								enemy++;
+								mymapa.modificar(objectiverow, objectivecol, aux->last_char);
+								a.entios.erase(aux);
+							}
+						}
+						else
+						{
+							enemy++;
+						}
+						if (enemy == a.entios.end())
+						{
+							hit = false;
+						}
+					}
+					pos++;
+					dmg--;
+				}
+			}
+			if (!end)
+			{
+				enti::cout << enti::Color::MAGENTA << "YOU MISS" << enti::endl;
+			}
+		}
 		movements--;
-		enti::cout << enti::cend;
+		it->arrows--;
+		enti::cout << enti::Color::MAGENTA << "ARROWS LEFT"<<it->arrows << enti::endl;
 	}
-	*/
+	enti::cout << enti::cend;
+	enti::systemPause();
 }
 
-void Player::dmg(int a, std::list <entio>::iterator &it)
-{
-	it->life -= a;
-	if (it->life == 0)
-	{
-		mymapa.modificar(it->row, it->last_col, it->last_char);
-		entios.erase(it);
-	}
-}
 
 void Player::controlX()
 {

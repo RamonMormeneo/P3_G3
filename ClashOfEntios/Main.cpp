@@ -31,8 +31,8 @@ void main()
 	enti::cout << enti::Color::LIGHTMAGENTA << "Press any key to begin the game!" << enti::endl;
 	enti::cout << enti::cend;
 	enti::systemPause();
-	/*
-	a.print(p1turn, p1.it->letra);*/
+	
+	a.print(p1turn, p1.it->letra);
 	enti::cout << enti::cend;
 	while (!endgame)
 	{

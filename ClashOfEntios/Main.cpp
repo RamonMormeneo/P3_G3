@@ -61,7 +61,10 @@ void main()
 				a.print(p1turn, p2.it->letra);
 				enti::cout << enti::cend;
 			}
-			
+			if (p2.entios.size() == 0)
+			{
+				endgame = true;
+			}
 		}
 		else {
 			if (startturn){
@@ -84,6 +87,10 @@ void main()
 			p2.movements = 10;
 			a.print(p1turn, p1.it->letra);
 			enti::cout << enti::cend;
+		}
+		if (p1.entios.size() == 0)
+		{
+			endgame = true;
 		}
 		}
 	}

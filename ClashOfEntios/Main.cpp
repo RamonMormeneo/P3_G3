@@ -41,7 +41,10 @@ void main()
 			if (startturn)
 			{
 				p1.reorder();
+				a.print(p1turn, p1.it->letra);
+				enti::cout << enti::Color::WHITE << "Player 1 turn" << enti::endl;
 				startturn = false;
+				enti::systemPause();
 			}
 			enti::InputKey num;
 		
@@ -69,7 +72,10 @@ void main()
 		else {
 			if (startturn){
 				p2.reorder();
+				a.print(p1turn, p2.it->letra);
+				enti::cout << enti::Color::WHITE << "Player 2 turn" << enti::endl;
 				startturn = false;
+				enti::systemPause();
 			}
 		enti::InputKey num;
 		num = enti::getInputKey();
